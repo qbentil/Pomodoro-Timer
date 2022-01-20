@@ -1,4 +1,10 @@
 {
+  "name": "pomodoro-timer",
+  "slug": "pomodoro-timer",
+  "owner": "qbentil",
+  "project-id": "0c6309ce-ef49-4810-a884-247b43fd5e1c",
+  "githuburl": "",
+  "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "dependencies": {
