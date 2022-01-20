@@ -16,35 +16,35 @@ const BREAK_SEC = "00";
 
 
 export default class App extends React.Component {
-  constructor()
-  {
+  constructor() {
     super();
     this.state = {
-      minCounter : this.WORK_MIN,
-      secCounter : this.WORK_SEC,
-      resumePauseState : false,
-      resumePauseButton : 'start',
-      timerName : "WORK",
-      workMin : this.WORK_MIN,
-      workSec : this.WORK_SEC,
-      breakMin : this.BREAK_MIN,
-      breakSec : this.BREAK_SEC
-
-    }
+      minCounter: this.WORK_MIN,
+      secCounter: this.WORK_SEC,
+      resumePauseState: false,
+      resumePauseButton: 'start',
+      timerName: 'WORK',
+      workMin: this.WORK_MIN,
+      workSec: this.WORK_SEC,
+      breakMin: this.BREAK_MIN,
+      breakSec: this.BREAK_SEC,
+    };
   }
 
   // Change Toggle state FALSE/TRUE
   toggle = () => {
-    this.setState ({
-      resumePauseState : !this.state.resumePauseState
-    })
+    this.setState({
+      resumePauseState: !this.state.resumePauseState,
+    });
     return this.toggleAction();
-  }
+  };
 
   // Order START / STOP TIMER
   toggleAction = () => {
-    return !this.state.resumePauseState? this.startTimer() : clearInterval(this.interval);
-  }
+    return !this.state.resumePauseState
+      ? this.startTimer()
+      : clearInterval(this.interval);
+  };
 
   // Start Timer Function
   startTimer = () => {
@@ -58,6 +58,7 @@ export default class App extends React.Component {
         Number(this.state.secCounter == 0)
       ) {
         // Vibrate
+        vibrate()
         clearInterval(this.interval);
         return this.switchTimers();
       } else if (
@@ -75,7 +76,7 @@ export default class App extends React.Component {
   };
 
   // Switch timer
-  switchTimers = () => {
+  switchTimers = () =>{
     if(this.state.timerName == "WORK")
     {
       this.setState({
@@ -103,47 +104,95 @@ export default class App extends React.Component {
   resetTimer = () => {
     clearInterval(this.interval);
     this.setState({
-      minCounter: normalizeDigits(prevState.workMin),
-      secCounter: normalizeDigits(prevState.workSec),
+      minCounter: normalizeDigits(this.prevState.workMin),
+      secCounter: normalizeDigits(this.prevState.workSec),
       resumePauseState: false,
       timerName: "WORK"
     })
   }
 
-  render()
-  {
-      return (
-      <View style={styles.container}>
-        <View style = {styles.headerWrapper}>
-          <Text style = {styles.title}>POMODORO TIMER</Text>
-          <Timer />
+  // Input values change funtions
+  onBreakMinCHange = change =>{
+    this.setState ({
+      breakMin: change,
+      minCounter: normalizeDigits(change)
+    })
+  }
+  onBreakSecCHange = change =>{
+    this.setState ({
+      breakSec: change,
+      secCounter: normalizeDigits(change)
+    })
+  }
+  onWorkMinChange = change =>{
+    this.setState ({
+      workMin: change,
+      secCounter: normalizeDigits(change)
+    })
+  }
+  onWorkSecChange = change =>{
+    this.setState ({
+      workSec: change,
+      secCounter: normalizeDigits(change)
+    })
+  }
+  render() {
+    return (
+      <TouchableWithoutFeedback style={styles.container}>
+        <View style={styles.headerWrapper}>
+          <Text style={styles.title}>POMODORO TIMER</Text>
+          <Timer 
+            timerName = {this.state.timerName}
+            min = {this.state.minCounter}
+            sec = {this.state.secCounter}
+          />
         </View>
-        <View style = {styles.inputWrapper}>
-          <View style = {styles.caps}>
-            <Text style = {styles.txt}>Work time: </Text>
-            <Text style = {styles.txt}>Break time: </Text>
+        <View style={styles.inputWrapper}>
+          <View style={styles.caps}>
+            <Text style={styles.txt}>Work time: </Text>
+            <Text style={styles.txt}>Break time: </Text>
           </View>
-        <KeyboardAvoidingView 
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.caps}
-        >
-          <NumericKeypad placeholder = "min" />
-          <NumericKeypad placeholder = "min" />
-
-        </KeyboardAvoidingView>
-                <KeyboardAvoidingView 
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.caps}
-        >
-          <NumericKeypad placeholder = "sec"  />
-          <NumericKeypad placeholder = "sec" />
-        </KeyboardAvoidingView>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.caps}>
+            <NumericKeypad 
+              placeholder="min" 
+              defaultValue = {this.state.workMin}
+              onChangeText = {this.onWorkMinChange}
+            />
+            <NumericKeypad 
+              placeholder="min"
+              defaultValue = {this.state.breakMin}
+              onChangeText = {this.onBreakMinCHange}
+             />
+          </KeyboardAvoidingView>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.caps}>
+            <NumericKeypad 
+              placeholder="sec" 
+              defaultValue = {this.state.workSec}
+              onChangeText = {this.onWorkSecChange}
+              
+              />
+            <NumericKeypad 
+              placeholder="sec" 
+              defaultValue = {this.state.breakSec}
+              onChangeText = {this.onBreakSecCHange}
+            />
+          </KeyboardAvoidingView>
         </View>
-        <View style = {styles.btnWrapper}>
-            <PlayButton />
-            <ResetButton />
+        <View style={styles.btnWrapper}>
+          // {!this.state.resumePauseState ? <PauseButton  onPress = {this.toggle}/> : <PlayButton onPress = {this.toggle} />}
+          if(!this.state.resumePauseState)
+          {
+            <PauseButton onPress = {this.toggle} />
+          }else{
+            <PlayButton onPress = {this.toggle} />
+          }
+          <ResetButton onPress = {this.resetTimer} />
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
