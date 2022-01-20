@@ -1,24 +1,39 @@
+import * as React from 'react';
+
 import { StyleSheet, Text, View } from 'react-native';
 
-import React from 'react';
+const Timer = (props) => {
+  return (
 
-const Timer = () =>  {
-
-    return (
-      <View style={styles.container}>
-        <Text>Timer!!</Text>
-      </View>
-    );
-}
+  <View style = {styles.container}>
+      <Text style = {styles.title}>WORK TIMER</Text>
+      <Text style = {styles.timer}>25 : 00</Text>
+  </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginVertical: 25,
+    paddingHorizontal: 100,
+    marginTop: 100,
+    alignItems: "center",
+    width: "100%",
+    backgroundColor: '#512DA8',
+    borderRadius:10
+
   },
+  title: {
+      marginVertical: 5,
+      fontWeight: 'bold',
+      fontSize: 20,
+      color: '#fff',
+      marginTop: 15
+  },
+  timer: {
+      fontWeight: 'bold',
+      marginVertical: 10,
+      fontSize: 50
+  }
 });
-
-
 export default Timer;
