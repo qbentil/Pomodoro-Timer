@@ -1,19 +1,31 @@
 {
-  "name": "pomodoro-timer",
-  "slug": "pomodoro-timer",
-  "owner": "qbentil",
-  "project-id": "0c6309ce-ef49-4810-a884-247b43fd5e1c",
-  "githuburl": "",
-  "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
-  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
   "dependencies": {
-    "@expo/vector-icons": "^12.0.5",
-    "expo": "~44.0.0",
-    "expo-status-bar": "~1.2.0",
+    "expo": "~43.0.2",
+    "expo-status-bar": "~1.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-web": "0.17.1"
-  }
+    "react-native-web": "0.17.1",
+    "expo-constants": "~12.1.3",
+    "react-native-svg": "12.1.1",
+    "@expo/vector-icons": "^12.0.0",
+    "react-native-paper": "4.9.2",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-vector-icons": "*",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-circular-progress": "*",
+    "react-native-circular-progress-indicator": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9"
+  },
+  "private": true
 }

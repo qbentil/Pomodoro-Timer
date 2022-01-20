@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import {PlayButton, ResetButton} from './components/Buttons';
 
 import Constants from 'expo-constants';

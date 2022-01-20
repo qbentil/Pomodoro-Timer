@@ -1,15 +1,13 @@
 import * as React from 'react';
-
-import { Platform, StyleSheet, TextInput } from 'react-native';
+import { Platform, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const NumericKeypad = (props) => {
     return (
       <TextInput style={styles.input} 
-          placeholder={props.placeholder}
           keyboardType={Platform.OS ? "numeric" : "number-pad"}
           returnKeyType='done'
           value = {25}
-          // onChangeText={(text) => this.setState({text})} 
+          {...props} 
       />
     );
 }
