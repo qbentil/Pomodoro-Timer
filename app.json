@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "pomodoro-timer",
-    "slug": "snack-96c9554a-7c93-4321-8a91-16ba870e19fd",
+    "slug": "pomodoro-timer",
+    "owner": "qbentil",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
