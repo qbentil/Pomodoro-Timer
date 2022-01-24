@@ -1,4 +1,10 @@
 {
+  "name": "pomodoro-timer",
+  "slug": "pomodoro-timer",
+  "owner": "qbentil",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "githuburl": "https://github.com/qbentil/Pomodoro-Timer/",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
